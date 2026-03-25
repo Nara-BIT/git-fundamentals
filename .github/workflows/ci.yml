@@ -6,16 +6,21 @@ jobs:                          # Define jobs
   build:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Building..."
+      - run: echo "setting up environment..."
+      - run: echo "Installing dependencies..."
+      - run : echo "Building..."
   
-  test:
+  parallel-test:
     needs: build          # Wait for build to complete
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Testing..."
+      - run: echo "running parallel task 1..."
+      - run: echo "running parallel task 2..."
+      - run: echo "running parallel task 3..."
   
   deploy:
-    needs: [build, test]  # Wait for both build and test
+    needs: [build, parallel-test]  # Wait for both build and parallel-test
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Deploying..."
+      - run: echo "Setting up deployment environment..."
+      - run: echo "Deploying application"
